@@ -1,11 +1,11 @@
 import { Header } from 'react-native-elements';
 import React from 'react';
 
-function FirstChoiceHeader() {
+function FirstChoiceHeader(props) {
     return(
       <Header
         backgroundColor={"#000"}
-        leftComponent={{ text: 'Workouts', style: { color: '#fff', fontSize: 40, fontWeight: "bold", marginLeft: 2, marginRight: -200, paddingBottom: 10 } }}
+        leftComponent={{ text: props.name, style: { color: '#fff', fontSize: 40, fontWeight: "bold", marginLeft: 2, marginRight: -200, paddingBottom: 10 } }}
       />
     );
 }

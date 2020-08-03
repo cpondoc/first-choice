@@ -10,6 +10,7 @@ import WorkoutCategories from './views/homepage/workoutCategories.js';
 import FirstChoiceHeader from './views/generic/header.js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SocialFeed from './pages/social.js';
+import AccountDetails from './pages/account.js';
 
 // Setting up navigation using bottom tabs
 const Tab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ const Tab = createBottomTabNavigator();
 function HomePage() {
   return(
     <View style={{flex: 1}}>
-      <FirstChoiceHeader />
+      <FirstChoiceHeader name="Home"/>
       <ScrollView>
         <WorkoutCategories />
         <WorkoutList />
@@ -36,11 +37,14 @@ export default function App() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Details') {
+            if (route.name === 'Home') {
               iconName = focused
-                ? 'ios-information-circle'
-                : 'ios-information-circle-outline';
-            } else if (route.name === 'Home') {
+                ? 'ios-home'
+                : 'ios-home';
+            } else if (route.name === 'Account') {
+              iconName = focused ? 'ios-person' : 'ios-person';
+            }
+            else if (route.name === 'Feed') {
               iconName = focused ? 'ios-list-box' : 'ios-list';
             }
 
@@ -53,7 +57,8 @@ export default function App() {
         }}
       >
         <Tab.Screen name="Home" component={HomePage} />
-        <Tab.Screen name="Details" component={SocialFeed} />
+        <Tab.Screen name="Feed" component={SocialFeed} />
+        <Tab.Screen name="Account" component={AccountDetails} />
       </Tab.Navigator>
       </NavigationContainer>
   );
