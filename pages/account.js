@@ -5,9 +5,14 @@ import styles from '../styles/style.js'
 import FirstChoiceHeader from '../views/generic/header.js'
 import conditioningImage from '../assets/dribbling.jpg'
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { createStackNavigator } from '@react-navigation/stack';
 
+// For helping with dimensions of the screen
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
+
+// Creating a stack navigator
+const AccountStack = createStackNavigator();
 
 // Settings Tab List
 const drillList = [
@@ -91,4 +96,12 @@ class AccountDetails extends React.Component {
     }
 }
 
-export default AccountDetails;
+function AccountView() {
+  return(
+    <AccountStack.Navigator>
+      <AccountStack.Screen name="Account" component={AccountDetails} />
+    </AccountStack.Navigator>
+  );
+}
+
+export default AccountView;

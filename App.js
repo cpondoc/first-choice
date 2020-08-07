@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, Text } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import WorkoutList  from './views/homepage/workoutList.js';
 import WorkoutCategories from './views/homepage/workoutCategories.js';
-import FirstChoiceHeader from './views/generic/header.js';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import SocialFeed from './pages/social.js';
 import AccountDetails from './pages/account.js';
@@ -16,6 +15,7 @@ import AccountDetails from './pages/account.js';
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
+// Home Page
 function HomePage() {
   return(
     <View style={{flex: 1}}>
@@ -28,8 +28,23 @@ function HomePage() {
   );
 }
 
+// Test Details Page
+function DetailsScreen({route}) {
+
+  const { drillName } = route.params;
+  const { drillTime } = route.params;
+
+  return(
+    <View>
+      <Text>Chris Pondoc</Text>
+      <Text>{(drillName)}</Text>
+    </View>
+  );
+}
+
 function MainTabNavigator() {
   return(
+    <NavigationContainer>
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
@@ -55,25 +70,25 @@ function MainTabNavigator() {
           inactiveTintColor: 'gray',
         }}
       >
-        <Tab.Screen name="Home" component={HomePage} />
+        <Tab.Screen name="Home" component={HomeStackNavigator} />
         <Tab.Screen name="Feed" component={SocialFeed} />
         <Tab.Screen name="Account" component={AccountDetails} />
       </Tab.Navigator>
+    </NavigationContainer>
   );
 }
 
-function MainStackNavigator() {
+function HomeStackNavigator() {
   return(
-    <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={MainTabNavigator} />
+        <Stack.Screen name='Home' component={HomePage} />
+        <Stack.Screen name='Details' component={DetailsScreen} />
       </Stack.Navigator>
-    </NavigationContainer>
   );
 }
 
 export default function App() {
   return (
-    <MainStackNavigator />
+    <MainTabNavigator />
   );
 }

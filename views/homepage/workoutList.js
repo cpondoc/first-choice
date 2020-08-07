@@ -3,6 +3,7 @@ import { ListItem } from 'react-native-elements';
 import React from 'react';
 import { Text,ScrollView } from 'react-native';
 import styles from '../../styles/style.js'
+import { useNavigation } from '@react-navigation/native';
 
 // Drill List
 const drillList = [
@@ -55,6 +56,9 @@ const drillList = [
 
 // React Component for Workouts
 function WorkoutList() {
+
+    const navigation = useNavigation();
+
     return(
       <>
       <Text style={styles.sectionHeader}>Beginner Drills</Text>
@@ -67,6 +71,11 @@ function WorkoutList() {
               leftIcon={{ name: l.icon }}
               title={l.name}
               subtitle={l.time}
+              onPress={() => { navigation.navigate('Details', {
+                  drillName: 'Two Ball Pound',
+                  drillTime: '20 Seconds',
+                });
+              }}
               bottomDivider
             />
           ))
