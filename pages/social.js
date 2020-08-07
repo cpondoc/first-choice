@@ -7,7 +7,6 @@ import FirstChoiceHeader from '../views/generic/header.js'
 function SocialFeed() {
     return(
         <View style={{flex: 1}}>
-            <FirstChoiceHeader name="Social Feed" />
             <ScrollView>
                 <Text style={styles.sectionHeader}>Instagram Feed</Text>
             </ScrollView>

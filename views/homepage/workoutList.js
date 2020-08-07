@@ -59,7 +59,7 @@ function WorkoutList() {
       <>
       <Text style={styles.sectionHeader}>Beginner Drills</Text>
       <Text style={{paddingLeft: 15, fontSize: 18}}>New to the game? Pick up these drills.</Text>
-      <ScrollView> 
+      <ScrollView style={{marginTop: 15, marginLeft: 15, marginRight: 18, borderRadius: 15, marginBottom: 25}}> 
         {
           drillList.map((l, i) => (
             <ListItem

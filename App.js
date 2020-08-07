@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
-import { Header } from 'react-native-elements';
 import React from 'react';
 import { View, ScrollView } from 'react-native';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import WorkoutList  from './views/homepage/workoutList.js';
 import WorkoutCategories from './views/homepage/workoutCategories.js';
 import FirstChoiceHeader from './views/generic/header.js';
@@ -14,11 +14,11 @@ import AccountDetails from './pages/account.js';
 
 // Setting up navigation using bottom tabs
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 function HomePage() {
   return(
     <View style={{flex: 1}}>
-      <FirstChoiceHeader name="Home"/>
       <ScrollView>
         <WorkoutCategories />
         <WorkoutList />
@@ -28,9 +28,8 @@ function HomePage() {
   );
 }
 
-export default function App() {
-  return (
-    <NavigationContainer>
+function MainTabNavigator() {
+  return(
       <Tab.Navigator
         initialRouteName="Home"
         screenOptions={({ route }) => ({
@@ -60,6 +59,21 @@ export default function App() {
         <Tab.Screen name="Feed" component={SocialFeed} />
         <Tab.Screen name="Account" component={AccountDetails} />
       </Tab.Navigator>
-      </NavigationContainer>
+  );
+}
+
+function MainStackNavigator() {
+  return(
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name='Home' component={MainTabNavigator} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+export default function App() {
+  return (
+    <MainStackNavigator />
   );
 }
